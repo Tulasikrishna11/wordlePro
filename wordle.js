@@ -11,6 +11,7 @@ button.onclick = function () {
     if (userInput.value.toUpperCase() === randomLetter) {
       result.textContent = "YOU WON!";
       userInput.value = "";
+      button.disabled = true;
     } else {
       let word = document.createElement("p");
       word.textContent = userInput.value.toUpperCase();
@@ -18,6 +19,7 @@ button.onclick = function () {
       userInput.value = "";
       if (count == 1) {
         result.textContent = `YOU LOSE,the correct word is ${randomLetter}`;
+        button.disabled = true;
       }
     }
     count -= 1;
