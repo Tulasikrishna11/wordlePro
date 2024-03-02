@@ -12,6 +12,7 @@ button.onclick = function () {
       result.textContent = "YOU WON!";
       userInput.value = "";
       button.disabled = true;
+      triesLeft.textContent = "";
     } else {
       let word = document.createElement("p");
       word.textContent = userInput.value.toUpperCase();
@@ -21,8 +22,8 @@ button.onclick = function () {
         result.textContent = `YOU LOSE,the correct word is ${randomLetter}`;
         button.disabled = true;
       }
+      count -= 1;
+      triesLeft.textContent = "Tries Left =" + count;
     }
-    count -= 1;
-    triesLeft.textContent = "Tries Left =" + count;
   }
 };
