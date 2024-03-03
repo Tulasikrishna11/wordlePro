@@ -3,7 +3,7 @@ let button = document.getElementById("submit");
 let result = document.getElementById("result");
 let container = document.getElementById("wordsContainer");
 let randomLetter = "GUARD";
-let count = 2;
+let count = 5;
 let triesLeft = document.getElementById("triesLeft");
 function win() {
   result.textContent = randomLetter + " is the correct word YOU WON! ";
@@ -23,7 +23,7 @@ function displayUserInput() {
       letterContainer.style.backgroundColor = "green";
     } else {
       if (randomLetter.includes(userEnteredWord[i])) {
-        letterContainer.style.backgroundColor = "red";
+        letterContainer.style.backgroundColor = "yellow";
       } else {
         letterContainer.style.backgroundColor = "grey";
       }
@@ -31,25 +31,30 @@ function displayUserInput() {
   }
 }
 function lose() {
-  if (count == 1) {
+  if (count == 0) {
     result.textContent = `YOU LOSE,the correct word is ${randomLetter}`;
     button.disabled = true;
+    triesLeft.textContent = "";
   }
 }
 function displayTriesLeft() {
   triesLeft.textContent = "Tries Left =" + count;
 }
 button.onclick = function () {
-  if (count > 0) {
-    if (userInput.value.toUpperCase() === randomLetter) {
-      win();
-      displayUserInput();
-    } else {
-      displayUserInput();
-      lose();
-      count -= 1;
-      displayTriesLeft();
+  if (userInput.value.length === 5) {
+    if (count > 0) {
+      if (userInput.value.toUpperCase() === randomLetter) {
+        win();
+        displayUserInput();
+      } else {
+        displayUserInput();
+        count -= 1;
+        displayTriesLeft();
+        lose();
+      }
+      userInput.value = "";
     }
-    userInput.value = "";
+  } else {
+    alert("enter a five letter word");
   }
 };
