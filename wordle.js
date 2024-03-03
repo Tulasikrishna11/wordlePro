@@ -22,7 +22,11 @@ function displayUserInput() {
     if (userEnteredWord[i] === randomLetter[i]) {
       letterContainer.style.backgroundColor = "green";
     } else {
-      letterContainer.style.backgroundColor = "red";
+      if (randomLetter.includes(userEnteredWord[i])) {
+        letterContainer.style.backgroundColor = "red";
+      } else {
+        letterContainer.style.backgroundColor = "grey";
+      }
     }
   }
 }
