@@ -37,7 +37,7 @@ function displayUserInput() {
     let color = letterContainer.style.backgroundColor;
     if (color !== "green") {
       if (memory2.includes(userEnteredWord[i])) {
-        letterContainer.style.backgroundColor = "yellow";
+        letterContainer.style.backgroundColor = "#b59f3b";
         let index = memory2.findIndex(function (char) {
           if (userEnteredWord[i] === char) {
             return true;
