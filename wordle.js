@@ -11,7 +11,6 @@ function declareWin() {
   triesLeft.textContent = "";
 }
 function displayUserInput() {
-  let memory = "";
   let memory2 = randomWord.split("");
   let wordContainer = document.createElement("div");
   wordContainer.classList.add("word-container");
@@ -20,7 +19,6 @@ function displayUserInput() {
   for (let i = 0; i < 5; i++) {
     let letterContainer = document.createElement("span");
     letterContainer.id = `${count}${i}`;
-    console.log(`${count}${i}`);
     letterContainer.textContent = userEnteredWord[i];
     wordContainer.appendChild(letterContainer);
     if (userEnteredWord[i] === randomWord[i]) {
@@ -31,8 +29,6 @@ function displayUserInput() {
         }
       });
       memory2.splice(index, 1);
-      console.log(memory2);
-      memory += userEnteredWord[i];
     }
   }
   for (let i = 0; i < 5; i++) {

@@ -2,10 +2,12 @@ span {
   margin: 10px;
   padding: 10px;
   display: block;
-  height: 40px;
-  width: 40px;
-  border: 1px solid black;
+  height: 47px;
+  width: 48px;
+  border: 2px solid black;
   border-radius: 7px;
+  color: white;
+  font-weight: 600;
 }
 .word-container {
   margin: 1rem;
