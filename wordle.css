@@ -14,3 +14,7 @@ span {
   display: flex;
   justify-content: center;
 }
+.result {
+  margin: 1rem;
+  font-weight: 600;
+}
