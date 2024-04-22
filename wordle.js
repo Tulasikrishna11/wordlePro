@@ -3,50 +3,97 @@ let button = document.getElementById("submit");
 let result = document.getElementById("result");
 let container = document.getElementById("wordsContainer");
 let triesLeft = document.getElementById("triesLeft");
-let randomWord = "APPLE";
+let randomWords = [
+  "apple",
+  "beach",
+  "chair",
+  "dance",
+  "earth",
+  "faith",
+  "grape",
+  "house",
+  "image",
+  "juice",
+  "lemon",
+  "magic",
+  "noise",
+  "oasis",
+  "peace",
+  "quiet",
+  "river",
+  "storm",
+  "table",
+  "unity",
+  "vital",
+  "water",
+  "xenon",
+  "young",
+  "zebra",
+  "guard",
+  "mango",
+];
+let randomWordNum = Math.ceil(Math.random() * randomWords.length);
+let randomWord = randomWords[randomWordNum].toUpperCase();
+console.log(randomWord);
 let count = 5;
 function declareWin() {
   result.textContent = randomWord + " is the correct word YOU WON! ";
   button.disabled = true;
   triesLeft.textContent = "";
 }
-function displayUserInput() {
-  let memory2 = randomWord.split("");
-  let wordContainer = document.createElement("div");
-  wordContainer.classList.add("word-container");
-  container.appendChild(wordContainer);
-  let userEnteredWord = userInput.value.toUpperCase();
-  for (let i = 0; i < 5; i++) {
-    let letterContainer = document.createElement("span");
-    letterContainer.id = `${count}${i}`;
-    letterContainer.textContent = userEnteredWord[i];
-    wordContainer.appendChild(letterContainer);
-    if (userEnteredWord[i] === randomWord[i]) {
-      letterContainer.style.backgroundColor = "green";
-      let index = memory2.findIndex(function (char) {
-        if (userEnteredWord[i] === char) {
-          return true;
-        }
-      });
-      memory2.splice(index, 1);
+function validate(correctWord, guessedWord) {
+  let tempguessedWord = [...guessedWord];
+  let tempCorrectWord = [...correctWord];
+  let correctLetterList = tempguessedWord.map((char, i) => {
+    let obj = {
+      letter: char,
+      iscorrect: false,
+      ispresent: false,
+    };
+    let letter = char;
+    let index = i;
+    if (tempCorrectWord[index] === letter) {
+      tempCorrectWord[index] = false;
+      obj.iscorrect = true;
+      obj.ispresent = true;
     }
-  }
-  for (let i = 0; i < 5; i++) {
-    let letterContainer = document.getElementById(`${count}${i}`);
-    console.log(`${count}${i}`);
-    let color = letterContainer.style.backgroundColor;
-    if (color !== "green") {
-      if (memory2.includes(userEnteredWord[i])) {
-        letterContainer.style.backgroundColor = "#b59f3b";
-        let index = memory2.findIndex(function (char) {
-          if (userEnteredWord[i] === char) {
+    return obj;
+  });
+  let validatedList = correctLetterList.map((obj) => {
+    let iscorrect = obj.iscorrect;
+    let letter = obj.letter;
+    if (!iscorrect) {
+      if (tempCorrectWord.includes(letter)) {
+        obj.ispresent = true;
+        let letterIndex = tempCorrectWord.findIndex(function (char) {
+          if (char === letter) {
             return true;
           }
         });
-        memory2.splice(index, 1);
-      } else {
-        letterContainer.style.backgroundColor = "grey";
+        tempCorrectWord[letterIndex] = false;
       }
+    }
+    return obj;
+  });
+  return render(validatedList);
+}
+function render(resultList) {
+  console.log(resultList);
+  let wordContainer = document.createElement("div");
+  document.body.appendChild(wordContainer);
+  wordContainer.classList.add("word-container");
+  for (let item of resultList) {
+    let letterContainer = document.createElement("span");
+    wordContainer.appendChild(letterContainer);
+    letterContainer.textContent = item.letter;
+    let correct = item.iscorrect;
+    let ispresent = item.ispresent;
+    if (correct && ispresent) {
+      letterContainer.style.backgroundColor = "green";
+    } else if (!correct && ispresent) {
+      letterContainer.style.backgroundColor = "#b59f3b";
+    } else {
+      letterContainer.style.backgroundColor = "grey";
     }
   }
 }
@@ -75,6 +122,6 @@ button.onclick = function () {
     displayTriesLeft();
     lose();
   }
-  displayUserInput();
+  validate(randomWord, userInputValue);
   userInput.value = "";
 };
