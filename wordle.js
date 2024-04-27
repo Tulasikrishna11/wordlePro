@@ -40,6 +40,7 @@ function declareWin() {
   result.textContent = randomWord + " is the correct word YOU WON! ";
   button.disabled = true;
   triesLeft.textContent = "";
+  userInput.disabled = true;
 }
 function validate(correctWord, guessedWord) {
   let tempguessedWord = [...guessedWord];
@@ -100,13 +101,14 @@ function lose() {
   if (count === 0) {
     result.textContent = `YOU LOSE,the correct word is ${randomWord}`;
     button.disabled = true;
+    userInput.disabled = true;
     triesLeft.textContent = "";
   }
 }
 function displayTriesLeft() {
   triesLeft.textContent = "Tries Left =" + count;
 }
-button.onclick = function () {
+function submit() {
   let userInputValue = userInput.value.toUpperCase();
   if (count < 1) return;
   if (userInputValue.length !== 5) {
@@ -123,4 +125,12 @@ button.onclick = function () {
   }
   validate(randomWord, userInputValue);
   userInput.value = "";
+}
+button.onclick = function () {
+  submit();
 };
+document.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    submit();
+  }
+});
