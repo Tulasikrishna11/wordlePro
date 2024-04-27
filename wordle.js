@@ -78,7 +78,6 @@ function validate(correctWord, guessedWord) {
   return render(validatedList);
 }
 function render(resultList) {
-  console.log(resultList);
   let wordContainer = document.createElement("div");
   document.body.appendChild(wordContainer);
   wordContainer.classList.add("word-container");
@@ -89,11 +88,11 @@ function render(resultList) {
     let correct = item.iscorrect;
     let ispresent = item.ispresent;
     if (correct && ispresent) {
-      letterContainer.style.backgroundColor = "green";
+      letterContainer.style.backgroundColor = "hsl(102, 31%, 38%)";
     } else if (!correct && ispresent) {
-      letterContainer.style.backgroundColor = "#b59f3b";
+      letterContainer.style.backgroundColor = " hsl(49, 46%, 51%)";
     } else {
-      letterContainer.style.backgroundColor = "grey";
+      letterContainer.style.backgroundColor = "hsl(0, 0%, 30%)";
     }
   }
 }
