@@ -5,15 +5,17 @@
 }
 
 span {
-  margin: 10px;
-  padding: 12px;
-  display: block;
-  height: 42px;
-  width: 42px;
-  border: 2px solid black;
-  border-radius: 7px;
   color: white;
-  font-weight: 700;
+  height: 1.5rem;
+  width: 1rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 15%;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  display: grid;
+  justify-content: center;
   place-content: center;
 }
 .word-container {
@@ -55,19 +57,16 @@ span {
 }
 
 .heading-letter:nth-child(1),
-.heading-letter:nth-child(4),
-.heading-letter:nth-child(7) {
+.heading-letter:nth-child(4) {
   background-color: var(--green-bg);
 }
 
 .heading-letter:nth-child(2),
-.heading-letter:nth-child(5),
-.heading-letter:nth-child(8) {
+.heading-letter:nth-child(5) {
   background-color: var(--yellow-bg);
 }
 
 .heading-letter:nth-child(3),
-.heading-letter:nth-child(6),
-.heading-letter:nth-child(9) {
+.heading-letter:nth-child(6) {
   background-color: var(--grey-bg);
 }
