@@ -39,7 +39,6 @@ let count = 5;
 function declareWin() {
   result.textContent = randomWord + " is the correct word YOU WON! ";
   button.disabled = true;
-  triesLeft.textContent = "";
   userInput.disabled = true;
 }
 function validate(correctWord, guessedWord) {
@@ -78,6 +77,18 @@ function validate(correctWord, guessedWord) {
   });
   return render(validatedList);
 }
+for (let i = 0; i < 5; i++) {
+  let wordContainer = document.createElement("div");
+  wordContainer.classList.add("mt-2");
+  document.body.appendChild(wordContainer);
+  wordContainer.classList.add("word-container");
+  for (let j = 0; j < 5; j++) {
+    let letterContainer = document.createElement("span");
+    letterContainer.id = `${i}${j}`;
+    wordContainer.appendChild(letterContainer);
+  }
+}
+
 function render(resultList) {
   let wordContainer = document.createElement("div");
   document.body.appendChild(wordContainer);
@@ -100,14 +111,12 @@ function render(resultList) {
 function lose() {
   if (count === 0) {
     result.textContent = `YOU LOSE,the correct word is ${randomWord}`;
+    result.style.color = "red";
     button.disabled = true;
     userInput.disabled = true;
-    triesLeft.textContent = "";
   }
 }
-function displayTriesLeft() {
-  triesLeft.textContent = "Tries Left =" + count;
-}
+
 function submit() {
   let userInputValue = userInput.value.toUpperCase();
   if (count < 1) return;
@@ -120,7 +129,6 @@ function submit() {
     declareWin();
   } else {
     count -= 1;
-    displayTriesLeft();
     lose();
   }
   validate(randomWord, userInputValue);
@@ -134,3 +142,22 @@ document.addEventListener("keypress", function (event) {
     submit();
   }
 });
+c = 0;
+function render(resultList) {
+  for (let i = 0; i < 5; i++) {
+    let letterContainerId = `${c}${i}`;
+    let letterContainer = document.getElementById(letterContainerId);
+    let item = resultList[i];
+    letterContainer.textContent = item.letter;
+    let correct = item.iscorrect;
+    let ispresent = item.ispresent;
+    if (correct && ispresent) {
+      letterContainer.style.backgroundColor = "hsl(102, 31%, 38%)";
+    } else if (!correct && ispresent) {
+      letterContainer.style.backgroundColor = " hsl(49, 46%, 51%)";
+    } else {
+      letterContainer.style.backgroundColor = "hsl(0, 0%, 30%)";
+    }
+  }
+  c++;
+}

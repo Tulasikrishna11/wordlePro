@@ -8,15 +8,15 @@ span {
   color: white;
   height: 1.5rem;
   width: 1rem;
-  padding: 1rem;
-  margin: 0.5rem;
+  padding: 1.5rem;
   border-radius: 15%;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  display: grid;
+  display: flex;
   justify-content: center;
-  place-content: center;
+  align-items: center;
+  margin-right: 0.1rem;
 }
 .word-container {
   display: flex;
@@ -69,4 +69,13 @@ span {
 .heading-letter:nth-child(3),
 .heading-letter:nth-child(6) {
   background-color: var(--grey-bg);
+}
+#submit {
+  background-color: var(--green-bg);
+  color: white;
+  border-radius: 7%;
+  padding: 5px 10px;
+  /* border-style: none; */
+  border: none;
+  box-shadow: 5px 2px 3px 02px black;
 }
